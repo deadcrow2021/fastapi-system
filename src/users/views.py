@@ -1,8 +1,8 @@
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from fastapi import APIRouter
-from src.schemas import User
-from src.services import user_to_dict
+from src.users.schemas import User
+from src.users.services import user_to_dict
 
 users_router = APIRouter(prefix='/users', tags=['Users'])
 

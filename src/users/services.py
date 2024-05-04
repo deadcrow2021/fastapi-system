@@ -1,4 +1,4 @@
-from src.schemas import User
+from src.users.schemas import User
 from typing import Dict, Any
 
 async def user_to_dict(user: User) -> Dict[str, Any]:

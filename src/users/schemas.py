@@ -1,13 +1,7 @@
 from pydantic import EmailStr, BaseModel
-from typing import Union, Annotated
+from typing import Annotated
 from annotated_types import MinLen, MaxLen
 
-
-class Item(BaseModel):
-    name: str
-    description: Union[str, None] = None
-    price: float
-    tax: Union[float, None] = None
 
 
 class User(BaseModel):
