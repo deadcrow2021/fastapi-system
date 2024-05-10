@@ -11,5 +11,23 @@ services:
     ports:
       - "5432:5432"
 
+    volumes:
+      - ./data/postgres-data:/var/lib/postgresql/data
+
     env_file:
       - .env
+
+
+  app:
+    container_name: app
+
+    build: .
+
+    ports:
+      - '8000:8000'
+
+    volumes:
+      - .:/code
+
+    depends_on:
+      - db
