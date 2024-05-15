@@ -12,3 +12,11 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+
+class DBSettings(BaseSettings):
+    db_url: str = f'postgresql+asyncpg://{settings.postgres_user}:{settings.postgres_password}@{settings.postgres_host}/{settings.postgres_db}'
+    db_debug: bool = settings.postgres_debug
+
+
+db_settings = DBSettings()

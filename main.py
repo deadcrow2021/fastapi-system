@@ -3,6 +3,7 @@ from fastapi import FastAPI
 import uvicorn
 
 from src.users.views import users_router
+from src.items.views import items_router
 from src.models import Base, db_manager
 
 
@@ -15,6 +16,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+app.include_router(items_router)
 app.include_router(users_router)
 
 

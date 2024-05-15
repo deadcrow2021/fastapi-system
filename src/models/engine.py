@@ -1,6 +1,13 @@
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
+from asyncio import current_task
+from sqlalchemy.ext.asyncio import (
+    create_async_engine,
+    async_sessionmaker,
+    async_scoped_session,
+    AsyncSession
+)
 
-from src.settings import settings
+from src.settings import db_settings
+
 
 class DBManager:
     def __init__(self, url: str, echo: bool = False) -> None:
@@ -16,7 +23,21 @@ class DBManager:
         )
 
 
+    def _get_scoped_session(self):
+        session = async_scoped_session(
+            session_factory=self.async_session,
+            scopefunc=current_task
+        )
+        return session
+
+
+    async def session_dependecy(self) -> AsyncSession:
+        session = self._get_scoped_session()
+        yield session
+        session.close()
+
+
 db_manager = DBManager(
-    url = f'postgresql+asyncpg://{settings.postgres_user}:{settings.postgres_password}@{settings.postgres_host}/{settings.postgres_db}',
-    echo=settings.postgres_debug
+    url = db_settings.db_url,
+    echo = db_settings.db_debug
 )
