@@ -4,13 +4,13 @@ import uvicorn
 
 from src.users.views import users_router
 from src.items.views import items_router
-from src.models import Base, db_manager
+# from src.models import Base, db_manager
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    async with db_manager.engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+    # async with db_manager.engine.begin() as conn:
+    #     await conn.run_sync(Base.metadata.create_all)
     yield
 
 
