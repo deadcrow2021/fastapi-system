@@ -16,3 +16,9 @@ class Profile(UserRelationMixin, Base):
         ForeignKey('user__table.id'),
         unique=True
     )
+
+    def __str__(self) -> str:
+        return f'Profile(first_name={self.first_name}, last_name="{self.last_name}, user_id={self.user_id}")'
+    
+    def __repr__(self) -> str:
+        return str(self)

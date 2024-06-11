@@ -34,7 +34,7 @@ class DBManager:
     async def session_dependecy(self) -> AsyncSession:
         session = self._get_scoped_session()
         yield session
-        session.close()
+        await session.close()
 
 
 db_manager = DBManager(

@@ -15,3 +15,9 @@ class Post(UserRelationMixin, Base):
         default='',
         server_default='',
     )
+
+    def __str__(self) -> str:
+        return f'Post(title={self.title}, user_id="{self.user_id}")'
+    
+    def __repr__(self) -> str:
+        return str(self)
