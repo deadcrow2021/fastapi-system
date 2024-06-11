@@ -36,7 +36,7 @@ async def update_item(
         item: Item,
         item_update: ItemUpdate,
         partial=False
-):
+    ):
     for key, val in item_update.model_dump(exclude_unset=partial).items():
         setattr(item, key, val)
     
@@ -47,6 +47,6 @@ async def update_item(
 async def delete_item(
         session: AsyncSession,
         item: Item,
-):
+    ):
     await session.delete(item)
     await session.commit()

@@ -18,7 +18,7 @@ items_router = APIRouter(prefix='/items', tags=['Items'])
 @items_router.get('/', response_model=list[Item])
 async def get_items_view(
     session: AsyncSession = Depends(db_manager.session_dependecy)
-):
+    ):
     return await get_items(session)
 
 
@@ -33,7 +33,7 @@ async def create_item_view(
 @items_router.get('/{item_id}/', response_model=Item)
 async def get_item_by_id_view(
     item: Item = Depends(item_by_id_dep)
-):
+    ):
     return item
 
 
